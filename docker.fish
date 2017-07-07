@@ -26,20 +26,20 @@ end
 function __fish_print_docker_containers --description 'Print a list of docker containers' -a select
     switch $select
         case running
-            docker ps --no-trunc --filter status=running --format '{{.ID}}\n{{.Names}}' | tr ',' '\n'
+            command docker ps --no-trunc --filter status=running --format '{{.ID}}\n{{.Names}}' | tr ',' '\n'
         case stopped
-            docker ps --no-trunc --filter status=exited --filter status=created --format '{{.ID}}\\n{{.Names}}' | tr ',' '\\n'
+            command docker ps --no-trunc --filter status=exited --filter status=created --format '{{.ID}}\\n{{.Names}}' | tr ',' '\\n'
         case all
-            docker ps --no-trunc --all --format '{{.ID}}\n{{.Names}}' | tr ',' '\n'
+            command docker ps --no-trunc --all --format '{{.ID}}\n{{.Names}}' | tr ',' '\n'
     end
 end
 
 function __fish_print_docker_images --description 'Print a list of docker images'
-    docker images --format '{{if eq .Repository "<none>"}}{{.ID}}\tUnnamed Image{{else}}{{.Repository}}:{{.Tag}}{{end}}'
+    command docker images --format '{{if eq .Repository "<none>"}}{{.ID}}\tUnnamed Image{{else}}{{.Repository}}:{{.Tag}}{{end}}'
 end
 
 function __fish_print_docker_repositories --description 'Print a list of docker repositories'
-    docker images --format '{{.Repository}}' | command grep -v '<none>' | command sort | command uniq
+    command docker images --format '{{.Repository}}' | command grep -v '<none>' | command sort | command uniq
 end
 
 # common options

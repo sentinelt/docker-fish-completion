@@ -22,7 +22,7 @@ function __fish_docker_no_subcommand --description 'Test if docker has yet to be
 end
 
 function __fish_print_docker_compose_services --description 'Print a list of docker-compose services'
-    docker-compose config --services ^/dev/null | command sort
+    command docker-compose config --services ^/dev/null | command sort
 end
 
 # common options
